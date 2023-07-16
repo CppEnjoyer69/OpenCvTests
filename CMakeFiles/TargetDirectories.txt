@@ -1,0 +1,3 @@
+/home/rafal/OpenCvTests/CMakeFiles/DisplayImage.dir
+/home/rafal/OpenCvTests/CMakeFiles/edit_cache.dir
+/home/rafal/OpenCvTests/CMakeFiles/rebuild_cache.dir
