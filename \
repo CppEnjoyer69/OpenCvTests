@@ -12,7 +12,7 @@ string path = "Resources/car.jpg";
 Mat img = imread(path);
 Mat imgResized, mask, imgHSV;
 int hmin = 0, smin = 0, vmin = 0;
-int hmax = 179, smax = 255, vmax = 255;
+int hmax = 0, smax = 0, vmax = 0;
 
 int main()
 {
