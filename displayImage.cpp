@@ -12,16 +12,18 @@ string path = "Resources/";
 int main(void)
 {
 	VideoCapture cap(0);
-	Mat img, imgBlur, cannyImg, imgDilation;
-
+	Mat img, imgResized;
+  
 	while(true)
 	{
 		cap.read(img);
-		GaussianBlur(img, imgBlur, Size(7, 7), 5, 0);
-    Canny(imgBlur, cannyImg, 20, 40);
-    Mat kernel = getStructuringElement(MORPH_RECT, Size(5,5));
-    dilate(cannyImg, imgDilation, kernel);
-		imshow("WebcamImg", imgDilation);
+    
+    resize(img, imgResized, Size(), 0.5, 0.5);
+		imshow("WebcamImg", imgResized);
+
+
+
+
 		waitKey(1);
 	}
 
