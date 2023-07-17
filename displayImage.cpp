@@ -8,24 +8,29 @@
 using namespace cv;
 using namespace std;
 
-string path = "Resources/";
+string path = "Resources/cards1.jpg";
 int main(void)
 {
-	VideoCapture cap(0);
-	Mat img, imgResized;
+	float width = 400, height = 550;
+
+  Mat matrix,imgWarp;
+	Mat img = imread(path);
   
-	while(true)
-	{
-		cap.read(img);
-    
-    resize(img, imgResized, Size(), 0.5, 0.5);
-		imshow("WebcamImg", imgResized);
+  Point2f sourcePoints[4] = { {275,287}, {341,287}, {265,360}, {341,360}};
+  Point2f destinationPoints[4] = {{0.0f, 0.0f}, {width,0.0f}, {0.0f, height}, {width, height}};
+  matrix = getPerspectiveTransform(sourcePoints, destinationPoints);
+
+   warpPerspective(img, imgWarp, matrix, Point(width, height));
+  imshow("img", img);
+  imshow("cardswrap", imgWarp);
+  
+		
 
 
 
 
-		waitKey(1);
-	}
+
+		waitKey(0);
 
 
 
