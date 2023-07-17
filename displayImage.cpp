@@ -16,11 +16,18 @@ int main(void)
   Mat matrix,imgWarp;
 	Mat img = imread(path);
   
+  
   Point2f sourcePoints[4] = { {275,287}, {341,287}, {265,360}, {341,360}};
   Point2f destinationPoints[4] = {{0.0f, 0.0f}, {width,0.0f}, {0.0f, height}, {width, height}};
   matrix = getPerspectiveTransform(sourcePoints, destinationPoints);
+  warpPerspective(img,imgWarp, matrix, Point(width, height));
 
-   warpPerspective(img, imgWarp, matrix, Point(width, height));
+  for(int i = 0; i < 4; ++i)
+  {
+    circle(img, sourcePoints[i], 3, Scalar(0,0,255),FILLED);
+
+  }
+  
   imshow("img", img);
   imshow("cardswrap", imgWarp);
   
