@@ -1,21 +1,33 @@
 
 #include <opencv2/opencv.hpp>
-#include <stdio.h>
+#include <iostream>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+
 using namespace cv;
-int main(int argc, char** argv)
+using namespace std;
+
+string path = "Resources/";
+int main(void)
 {
-    if (argc != 2) {
-        printf("usage: DisplayImage.out <Image_Path>\n");
-        return -1;
-    }
-    Mat image;
-    image = imread(argv[1], 1);
-    if (!image.data) {
-        printf("No image data \n");
-        return -1;
-    }
-    namedWindow("Display Image", WINDOW_AUTOSIZE);
-    imshow("Display Image", image);
-    waitKey(0);
+	VideoCapture cap(0);
+	Mat img, imgBlur, cannyImg, imgDilation;
+
+	while(true)
+	{
+		cap.read(img);
+		GaussianBlur(img, imgBlur, Size(7, 7), 5, 0);
+    Canny(imgBlur, cannyImg, 20, 40);
+    Mat kernel = getStructuringElement(MORPH_RECT, Size(5,5));
+    dilate(cannyImg, imgDilation, kernel);
+		imshow("WebcamImg", imgDilation);
+		waitKey(1);
+	}
+
+
+
+
+
     return 0;
 }
